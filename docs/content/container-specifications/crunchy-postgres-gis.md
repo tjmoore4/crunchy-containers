@@ -2,22 +2,20 @@
 title: "crunchy-postgres-gis"
 date:
 draft: false
-weight: 11
 ---
 
 PostgreSQL (pronounced "post-gress-Q-L") is an open source, ACID compliant, relational database management system (RDBMS) developed by a worldwide team of volunteers. The crunchy-postgres-gis container image is unmodified, open source PostgreSQL packaged and maintained by professionals. This image is identical to the crunchy-postgres image except it includes the open source geospatial extension [PostGIS](https://postgis.net/) for PostgreSQL in addition to the language extension [PL/R](http://www.joeconway.com/plr.html) which allows for writing functions in the R statistical computing language.
 
+For more information about configuration options for the `crunchy-postgres-gis` please reference the [`crunchy-postgres`]({{< relref "/container-specifications/crunchy-postgres" >}}) docuentation. The `crunchy-postgres-gis` image is built using the `crunchy-postgres` image and supports the same features, packages, running modes, and volumes.
+
 ## Features
 
-The following features are supported by the `crunchy-postgres-gis` container:
+In addition to features provided by the `crunchy-postgres` container, the following features are supported by the `crunchy-postgres-gis` container:
 
-* Kubernetes and OpenShift secrets
-* Backup and restoration from various tools: `pgbackrest`, `pg_basebackup` and `pg_dump`/`pg_restore`.
-* Custom mounted configuration files (see below)
-* Async and Sync Replication
 * PostGIS
 * PL/R
 
+<<<<<<< HEAD
 ## Packages
 
 The crunchy-postgres-gis Docker image contains the following packages (versions vary depending on PostgreSQL version):
@@ -82,19 +80,19 @@ The crunchy-postgres-gis Docker image contains the following packages (versions 
 **/recover**|Volume used for Point In Time Recovery (PITR) during startup of the PostgreSQL database.
 
 ## Custom Configuration
+=======
+## Running Modes
+>>>>>>> Add documentation for compacted postgres image
 
-The following configuration files can be mounted to the `/pgconf` volume in the `crunchy-postgres` container to customize the runtime:
+The `crunchy-postgres-gis` Docker image can be run in modes to enable functionality. The `MODE` environment variable must be set to run the image in the correct mode. Each mode uses environment variables to configure how the container will be run, more information about these environment variables and custom configurations for each mode can be found in the following pages:
 
-**Name**|**Description**
-:-----|:-----
-`ca.crt`| Certificate of the CA used by the server when using SSL authentication
-`ca.crl`| Revocation list of the CA used by the server when using SSL authentication
-`pg_hba.conf`| Client authentication rules for the database
-`pg_ident.conf`| Mapping of external users (such as SSL certs, GSSAPI, LDAP) to database users
-`postgresql.conf`| PostgreSQL settings
-`server.key`| Key used by the server when using SSL authentication
-`server.crt`| Certificate used by the server when using SSL authentication
-`setup.sql`|Custom SQL to execute against the database.  Note: only run during the first startup (initialization)
+* [Crunchy PostgreSQL]({{< relref "/container-specifications/crunchy-postgres" >}}): `postgres`
+* [Crunchy backup]({{< relref "/container-specifications/crunchy-postgres" >}}): `backup`
+* [Crunchy pgbasebackup restore]({{< relref "/container-specifications/crunchy-postgres" >}}-restore): `pgbasebackup-restore`
+* [Crunchy pgbench]({{< relref "/container-specifications/crunchy-postgres" >}}): `pgbench`
+* [Crunchy pgdump]({{< relref "/container-specifications/crunchy-postgres" >}}): `pgdump`
+* [Crunchy pgrestore]({{< relref "/container-specifications/crunchy-postgres" >}}): `pgrestore`
+* [Crunchy sqlrunner]({{< relref "/container-specifications/crunchy-postgres/sqlrunner" >}}): `sqlrunner`
 
 ## Verifying PL/R
 
